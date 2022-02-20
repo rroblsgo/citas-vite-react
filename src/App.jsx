@@ -1,11 +1,17 @@
-function App() {
+import Header from './components/Header';
+import Formulario from './components/Formulario';
+import ListadoPacientes from './components/ListadoPacientes';
+
+const App = () => {
   return (
-    <div className="w-full">
-      <h1 className="text-4xl bg-red-300 font-bold w-5/6 mx-auto text-center rounded mt-5 py-3">
-        Hola Mundo!!
-      </h1>
+    <div className="container mx-auto mt-20">
+      <Header />
+      <div className="mt-12 md:flex">
+        <Formulario />
+        <ListadoPacientes />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
