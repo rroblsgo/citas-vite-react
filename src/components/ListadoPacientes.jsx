@@ -1,7 +1,6 @@
 import Paciente from './Paciente';
 
-const ListadoPacientes = ({ pacientes }) => {
-  console.log(pacientes);
+const ListadoPacientes = ({ pacientes, setPaciente, eliminarPaciente }) => {
   return (
     <div className="md:w-1/2 lg:w-3/5">
       {pacientes && pacientes.length ? (
@@ -15,7 +14,12 @@ const ListadoPacientes = ({ pacientes }) => {
           </p>
           <div className="md:h-screen overflow-y-scroll">
             {pacientes.map((paciente) => (
-              <Paciente key={paciente.id} paciente={paciente} />
+              <Paciente
+                key={paciente.id}
+                paciente={paciente}
+                setPaciente={setPaciente}
+                eliminarPaciente={eliminarPaciente}
+              />
             ))}
           </div>
         </div>
