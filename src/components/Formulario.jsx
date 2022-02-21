@@ -1,6 +1,26 @@
+import { useState } from 'react';
+
 const Formulario = () => {
+  const [nombre, setNombre] = useState('');
+  const [propietario, setPropietario] = useState('');
+  const [email, setEmail] = useState('');
+  const [fecha, setFecha] = useState('');
+  const [sintomas, setSintomas] = useState('');
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // validación del formulario
+    if ([nombre, propietario, email, fecha, sintomas].includes('')) {
+      setError(true);
+      return;
+    }
+    setError(false);
+  };
+
   return (
-    <div className="md:w-1/2 lg:w-2/5">
+    <div className="md:w-1/2 lg:w-2/5 mx-5">
       <h2 className="font-black text-3xl text-center">
         Seguimiento de Pacientes
       </h2>
@@ -9,7 +29,15 @@ const Formulario = () => {
         <span className="text-indigo-600 font-bold">Adminístralos</span>
       </p>
 
-      <form className="bg-white shadow-md rounded-lg px-5 py-10 mb-10">
+      <form
+        className="bg-white shadow-md rounded-lg px-5 py-10 mb-10"
+        onSubmit={handleSubmit}
+      >
+        {error && (
+          <div className="bg-red-800 text-white text-center p-2 uppercase font-bold mb-3 rounded">
+            <p>Todos los campos son obligatorios</p>
+          </div>
+        )}
         <div className="mb-5">
           <label
             htmlFor="mascota"
@@ -22,6 +50,8 @@ const Formulario = () => {
             id="mascota"
             placeholder="Nombre mascota..."
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -36,6 +66,8 @@ const Formulario = () => {
             id="propietario"
             placeholder="Nombre Propietario..."
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={propietario}
+            onChange={(e) => setPropietario(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -50,6 +82,8 @@ const Formulario = () => {
             id="email"
             placeholder="Email Contacto Propietario..."
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -63,6 +97,8 @@ const Formulario = () => {
             type="date"
             id="alta"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -72,10 +108,12 @@ const Formulario = () => {
           >
             Síntomas
           </label>
-          <textArea
+          <textarea
             id="sintomas"
             placeholder="Describe los síntomas ..."
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={sintomas}
+            onChange={(e) => setSintomas(e.target.value)}
           />
         </div>
         <div className="mb-5">
